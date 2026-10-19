@@ -1,0 +1,207 @@
+.section {
+  position: relative;
+  padding: var(--space-9) var(--gutter);
+  overflow: clip;
+}
+
+/* huge faint index numeral drifting behind the composition (solid, not outlined) */
+.numeral {
+  position: absolute;
+  top: 2%;
+  right: calc(var(--gutter) - 1rem);
+  font-family: var(--font-display);
+  font-size: clamp(9rem, 28vw, 26rem);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: var(--ink-3);
+  opacity: 0.55;
+  user-select: none;
+  pointer-events: none;
+}
+
+.section[data-flip='true'] .numeral {
+  right: auto;
+  left: calc(var(--gutter) - 1rem);
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(48% 55% at 78% 42%, var(--lime-a08), transparent 70%);
+  pointer-events: none;
+}
+
+.section[data-flip='true'] .glow {
+  background: radial-gradient(48% 55% at 22% 42%, var(--lime-a08), transparent 70%);
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  gap: var(--space-7);
+  align-items: center;
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+.visual {
+  order: -1;
+  min-width: 0;
+}
+
+.panel {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.kicker span {
+  margin-right: var(--space-2);
+  color: var(--lime-500);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 0.9rem + 2.3vw, 2.35rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.titleLink {
+  display: inline;
+  background: linear-gradient(var(--lime-500), var(--lime-500)) 0 100% / 0 2px no-repeat;
+  padding-bottom: 0.1em;
+  transition: background-size var(--dur-3) var(--ease-out);
+}
+
+.titleIcon {
+  display: inline-block;
+  margin-left: 0.3em;
+  vertical-align: 0.05em;
+  color: var(--lime-500);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .titleLink:hover {
+    background-size: 100% 2px;
+  }
+
+  .titleLink:hover .titleIcon {
+    transform: translate(2px, -2px);
+  }
+}
+
+.summary {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--text-1);
+}
+
+.brief {
+  display: grid;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+  border-block: 1px solid var(--line-1);
+}
+
+.brief dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.brief dd {
+  margin-top: 0.15rem;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.facts li {
+  display: grid;
+  gap: 0.15rem;
+  padding: var(--space-3);
+  border: 1px solid var(--line-1);
+  border-radius: var(--r-2);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.facts strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  color: var(--lime-500);
+  overflow-wrap: anywhere;
+}
+
+.facts span {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--text-2);
+}
+
+.note {
+  padding: var(--space-3) var(--space-4);
+  border-left: 2px solid var(--lime-500);
+  border-radius: 0 var(--r-2) var(--r-2) 0;
+  background: var(--lime-a08);
+  font-size: var(--fs-sm);
+  color: var(--text-1);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+}
+
+@media (min-width: 960px) {
+  .section {
+    padding-block: var(--space-10);
+  }
+
+  .inner {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: var(--space-8);
+  }
+
+  .visual {
+    order: 0;
+  }
+
+  .section[data-flip='true'] .text {
+    order: 2;
+  }
+
+  .panel {
+    padding: var(--space-6);
+  }
+}

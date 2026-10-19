@@ -1,0 +1,303 @@
+/* The About "sheet" rises over the last project: rounded top edge, shadow, and a negative margin. */
+.about {
+  position: relative;
+  z-index: 2;
+  margin-top: -3.5rem;
+  padding: var(--section-y) var(--gutter);
+  border-radius: 2.5rem 2.5rem 0 0;
+  border-top: 1px solid var(--line-2);
+  background:
+    radial-gradient(60% 40% at 12% 0%, var(--lime-a08), transparent 70%),
+    var(--ink-1);
+  box-shadow: 0 -2.5rem 4rem rgba(0, 0, 0, 0.6);
+}
+
+/* lime hairline across the sheet's top edge */
+.about::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 14%;
+  right: 14%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--lime-500), transparent);
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-9);
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+.wipe {
+  will-change: clip-path;
+}
+
+.intro {
+  display: grid;
+  gap: var(--space-7);
+  align-items: start;
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 38rem;
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--text-2);
+}
+
+.copy p:first-child {
+  color: var(--text-1);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+}
+
+.block {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.blockTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  font-weight: 400;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--lime-500);
+}
+
+.blockTitle::after {
+  content: '';
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line-3), transparent);
+}
+
+/* ---- timeline ------------------------------------------------------------------------------------------------- */
+.timeline {
+  position: relative;
+  display: grid;
+  gap: var(--space-6);
+  padding-left: 2.25rem;
+  perspective: 1200px;
+}
+
+.rail {
+  position: absolute;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  left: 0.5rem;
+  width: 1px;
+  background: var(--line-2);
+}
+
+.spine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--lime-500), var(--lime-a32));
+  box-shadow: 0 0 12px var(--lime-a32);
+  transform-origin: 50% 0;
+}
+
+.entry {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.node {
+  position: absolute;
+  top: 1.7rem;
+  left: -2.25rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 2px solid var(--line-3);
+  border-radius: 50%;
+  background: var(--ink-1);
+  transition:
+    border-color var(--dur-3) ease,
+    box-shadow var(--dur-3) ease;
+}
+
+.node[data-current='true'] {
+  border-color: var(--lime-500);
+  box-shadow:
+    0 0 0 4px var(--lime-a16),
+    0 0 16px var(--lime-a32);
+}
+
+.card {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: var(--border);
+  border-radius: var(--r-3);
+  background: linear-gradient(180deg, var(--ink-2), var(--ink-1));
+  box-shadow: var(--shadow-1);
+  transition:
+    border-color var(--dur-3) ease,
+    transform var(--dur-3) var(--ease-out),
+    box-shadow var(--dur-3) ease;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    border-color: var(--lime-a32);
+    transform: translateY(var(--hover-lift));
+    box-shadow: var(--shadow-2);
+  }
+}
+
+.period {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--lime-500);
+}
+
+.role {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-display);
+}
+
+.company {
+  font-size: var(--fs-lead);
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.detail {
+  color: var(--text-2);
+}
+
+.detail span {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.lead {
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+
+.list li {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line-1);
+  border-radius: var(--r-2);
+  background: rgba(255, 255, 255, 0.02);
+  font-size: var(--fs-sm);
+  color: var(--text-1);
+}
+
+.list li::before {
+  content: '';
+  flex: none;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-top: 0.55em;
+  border-radius: 50%;
+  background: var(--lime-500);
+}
+
+/* ---- education ------------------------------------------------------------------------------------------------ */
+.education {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.edu {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-5);
+  border: var(--border);
+  border-left: 2px solid var(--lime-500);
+  border-radius: 0 var(--r-3) var(--r-3) 0;
+  background: linear-gradient(90deg, var(--lime-a08), transparent 40%), var(--ink-2);
+}
+
+.eduYear {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--lime-500);
+}
+
+.eduDegree {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-display);
+}
+
+.eduPlace {
+  color: var(--text-2);
+}
+
+@media (min-width: 900px) {
+  .intro {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: var(--space-9);
+  }
+
+  .timeline {
+    padding-left: 3rem;
+  }
+
+  .rail {
+    left: 0.7rem;
+  }
+
+  .node {
+    left: -3rem;
+  }
+
+  .education {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about {
+    margin-top: -5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about {
+    margin-top: 0;
+  }
+
+  .card {
+    transition: none;
+  }
+}

@@ -1,0 +1,70 @@
+.heading {
+  display: grid;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-hero);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+}
+
+/* mask: letters rise from below the line */
+.line {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.06em;
+  margin-block: -0.06em;
+  white-space: nowrap;
+}
+
+.char {
+  display: inline-block;
+  transform: translateY(115%) rotate(6deg);
+  transform-origin: 0 100%;
+  animation: rise var(--dur-5) var(--ease-out) both;
+  animation-delay: calc(var(--base, 0.1s) + var(--i) * 45ms);
+}
+
+.lime {
+  color: var(--lime-500);
+}
+
+.outline {
+  color: transparent;
+  -webkit-text-stroke: clamp(1px, 0.18vw, 2.5px) var(--text-1);
+}
+
+.outline .char {
+  animation:
+    rise var(--dur-5) var(--ease-out) both,
+    fill 1.4s var(--ease-in-out) both;
+  animation-delay: calc(var(--base, 0.1s) + var(--i) * 45ms), calc(1s + var(--i) * 60ms);
+}
+
+@keyframes rise {
+  to {
+    transform: translateY(0) rotate(0);
+  }
+}
+
+/* outlined letters flood with lime, then settle back to the outline */
+@keyframes fill {
+  0% {
+    color: transparent;
+  }
+  35% {
+    color: var(--lime-500);
+    -webkit-text-stroke-color: var(--lime-500);
+  }
+  100% {
+    color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char,
+  .outline .char {
+    animation: none;
+    transform: none;
+  }
+}

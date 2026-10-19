@@ -1,0 +1,102 @@
+.scene {
+  position: relative;
+  width: 100%;
+  container-type: inline-size;
+  --px: 0;
+  --py: 0;
+  --gx: 20%;
+}
+
+/* perspective lives here; GSAP fades this box (opacity would flatten the rig if it were set on the rig itself) */
+.stage {
+  position: absolute;
+  inset: 0;
+  perspective: 1500px;
+  perspective-origin: 50% 40%;
+}
+
+.rig {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateY(calc(var(--px) * 6deg)) rotateX(calc(var(--py) * -4deg));
+  transition: transform var(--dur-3) var(--ease-out);
+}
+
+.slot {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.pose {
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+}
+
+/* click target for the whole composition (decorative duplicate of the title / button links) */
+.hit {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: block;
+  border-radius: var(--r-3);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hint {
+  position: absolute;
+  right: 4%;
+  bottom: 3%;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--r-pill);
+  background: var(--lime-500);
+  color: var(--lime-ink);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--dur-2) ease,
+    transform var(--dur-3) var(--ease-out);
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .hit:hover .hint {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* touch devices have no hover: keep a quiet, permanent affordance */
+@media (hover: none) {
+  .hint {
+    opacity: 0.92;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt {
+    transform: none;
+    transition: none;
+  }
+
+  .rig {
+    will-change: auto;
+  }
+}

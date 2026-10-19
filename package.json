@@ -1,0 +1,33 @@
+{
+  "name": "akash-ganapathy-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Immersive portfolio for Akash Ganapathy — UI/UX designer and frontend developer",
+  "scripts": {
+    "dev": "next dev -p 3100",
+    "build": "next build",
+    "start": "next start -p 3100",
+    "typecheck": "tsc --noEmit",
+    "assets": "node scripts/build-assets.js",
+    "capture": "node scripts/capture-screens.js",
+    "resume": "node scripts/build-resume.js",
+    "check:links": "node scripts/check-links.js"
+  },
+  "dependencies": {
+    "@react-three/fiber": "8.15.11",
+    "framer-motion": "10.18.0",
+    "gsap": "3.12.5",
+    "next": "12.3.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "three": "0.158.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.19.3",
+    "@types/react": "18.2.45",
+    "@types/react-dom": "18.2.17",
+    "@types/three": "0.158.3",
+    "puppeteer-core": "13.7.0",
+    "typescript": "4.9.5"
+  }
+}

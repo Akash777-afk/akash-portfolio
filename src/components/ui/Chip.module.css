@@ -1,0 +1,19 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: 0.04em;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+.lime {
+  border-color: var(--lime-a32);
+  background: var(--lime-a08);
+  color: var(--lime-500);
+}

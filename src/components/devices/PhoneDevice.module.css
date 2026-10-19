@@ -1,0 +1,112 @@
+.phone {
+  --w: 15rem;
+  position: relative;
+  width: var(--w);
+  font-size: calc(var(--w) / 15); /* 1em ≈ 1/15 of the phone width: all bezel measurements scale with the device */
+  transform-style: preserve-3d;
+}
+
+.body {
+  position: relative;
+  padding: 0.5em;
+  border-radius: 2.35em;
+  background: linear-gradient(150deg, #3a4048 0%, #14171c 38%, #262b32 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 2.4em 3.4em -1.2em rgba(0, 0, 0, 0.7),
+    0 0.6em 1.4em rgba(0, 0, 0, 0.45);
+  transform-style: preserve-3d;
+}
+
+/* stacked slices behind the face give the handset real thickness when it rotates */
+.layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 2.35em;
+  background: linear-gradient(150deg, #2a3037, #12151a);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+}
+
+.key {
+  position: absolute;
+  width: 0.2em;
+  border-radius: 0.12em;
+  background: linear-gradient(90deg, #4a525c, #1c2025);
+  transform: translateZ(-9px);
+}
+
+.keyPower {
+  right: -0.14em;
+  top: 18%;
+  height: 7%;
+}
+
+.keyUp {
+  left: -0.14em;
+  top: 15%;
+  height: 5%;
+}
+
+.keyDown {
+  left: -0.14em;
+  top: 22%;
+  height: 9%;
+}
+
+.face {
+  position: relative;
+  border-radius: 1.9em;
+  overflow: hidden;
+  background: #000;
+  transform: translateZ(0.5px);
+}
+
+.screen {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1.9em;
+  background: #05070a;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: 50% 50%;
+}
+
+/* camera punch-hole */
+.island {
+  position: absolute;
+  top: 0.8em;
+  left: 50%;
+  width: 0.85em;
+  height: 0.85em;
+  margin-left: -0.425em;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #2b3342 0 18%, #05070a 55%);
+  box-shadow: 0 0 0 0.12em rgba(0, 0, 0, 0.9);
+}
+
+/* specular glare that slides with the pointer / scroll via --gx */
+.glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(112deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 26%, transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 18%);
+  background-size: 220% 100%, 100% 100%;
+  background-position: var(--gx, 20%) 0, 0 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: background-position var(--dur-4) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glare {
+    transition: none;
+  }
+}

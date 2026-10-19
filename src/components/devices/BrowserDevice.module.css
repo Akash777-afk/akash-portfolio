@@ -1,0 +1,126 @@
+.browser {
+  --w: 40rem;
+  position: relative;
+  width: var(--w);
+  font-size: calc(var(--w) / 46); /* 1em ≈ 1/46 of the window width */
+  transform-style: preserve-3d;
+}
+
+.body {
+  position: relative;
+  padding: 0.28em;
+  border-radius: 0.95em;
+  background: linear-gradient(145deg, #353b44, #12151a 45%, #232930);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 3em 4.5em -1.5em rgba(0, 0, 0, 0.75),
+    0 0.8em 1.8em rgba(0, 0, 0, 0.45);
+  transform-style: preserve-3d;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.95em;
+  background: linear-gradient(145deg, #262b32, #101318);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.face {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.7em;
+  background: #0b0d11;
+  transform: translateZ(0.5px);
+}
+
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 1.1em;
+  height: 2.5em;
+  padding: 0 1em;
+  background: linear-gradient(180deg, #232830, #1a1e25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.dots {
+  display: inline-flex;
+  gap: 0.5em;
+}
+
+.dots i {
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  background: #4b525c;
+}
+
+.dots i:first-child {
+  background: #ff6b6b;
+}
+
+.dots i:nth-child(2) {
+  background: #ffcb4d;
+}
+
+.dots i:nth-child(3) {
+  background: #5be7a0;
+}
+
+.url {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  flex: 1 1 auto;
+  max-width: 26em;
+  height: 1.6em;
+  margin-inline: auto;
+  padding: 0 0.9em;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  color: #aab2bb;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.url span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.screen {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(112deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 24%, transparent 40%);
+  background-size: 240% 100%;
+  background-position: var(--gx, 10%) 0;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  transition: background-position var(--dur-4) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glare {
+    transition: none;
+  }
+}

@@ -1,0 +1,35 @@
+.work {
+  position: relative;
+  background: var(--ink-1);
+}
+
+.floor {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 36rem;
+  overflow: hidden;
+  perspective: 700px;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, #000, transparent);
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent);
+}
+
+.grid {
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  top: -10rem;
+  height: 60rem;
+  background:
+    linear-gradient(rgba(200, 255, 46, 0.28) 1px, transparent 1px) 0 0 / 100% 4rem,
+    linear-gradient(90deg, rgba(200, 255, 46, 0.2) 1px, transparent 1px) 0 0 / 4rem 100%;
+  transform: rotateX(68deg);
+  transform-origin: 50% 0;
+}
+
+.header {
+  position: relative;
+  padding: var(--space-10) var(--gutter) var(--space-3);
+  max-width: var(--maxw);
+  margin-inline: auto;
+}

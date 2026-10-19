@@ -1,0 +1,110 @@
+.footer {
+  position: relative;
+  z-index: var(--z-content);
+  padding: var(--space-9) var(--gutter) var(--space-6);
+  background: var(--ink-0);
+  border-top: 1px solid var(--line-1);
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-8);
+  max-width: var(--maxw);
+  margin-inline: auto;
+  grid-template-columns: 1fr;
+}
+
+.mark {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 2rem + 6vw, 6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  color: var(--lime-500);
+}
+
+.statement {
+  margin-top: var(--space-4);
+  color: var(--text-2);
+}
+
+.where {
+  margin-top: var(--space-1);
+  color: var(--text-2);
+}
+
+.ext {
+  margin-left: -0.15em;
+  color: var(--lime-500);
+}
+
+.mail {
+  display: block;
+  width: fit-content;
+  margin-top: var(--space-3);
+  min-height: 2.75rem;
+  padding-block: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-1);
+  border-bottom: 1px solid var(--line-3);
+  transition:
+    color var(--dur-2) ease,
+    border-color var(--dur-2) ease;
+  word-break: break-all;
+}
+
+@media (hover: hover) {
+  .mail:hover {
+    color: var(--lime-500);
+    border-color: var(--lime-500);
+  }
+}
+
+.heading {
+  margin-bottom: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  font-weight: 400;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  min-height: 2.75rem;
+  align-items: center;
+  font-size: var(--fs-body);
+  color: var(--text-2);
+  transition: color var(--dur-2) ease;
+}
+
+.idx {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  color: var(--text-3);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    color: var(--lime-500);
+  }
+}
+
+.fine {
+  max-width: var(--maxw);
+  margin: var(--space-8) auto 0;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line-1);
+  font-size: var(--fs-sm);
+  color: var(--text-3);
+}
+
+@media (min-width: 860px) {
+  .inner {
+    grid-template-columns: 1.6fr 1fr 1fr;
+  }
+}

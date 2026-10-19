@@ -1,0 +1,39 @@
+.shell {
+  position: relative;
+}
+
+.main {
+  position: relative;
+  outline: none;
+}
+
+/* Every top-level section sits above the fixed WebGL stage. */
+.main > *:not([data-stage="true"]) {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.skip {
+  position: fixed;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: calc(var(--z-curtain) + 1);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--r-pill);
+  background: var(--lime-500);
+  color: var(--lime-ink);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  font-weight: 700;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  transform: translateY(-200%);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.skip:focus {
+  transform: translateY(0);
+}
