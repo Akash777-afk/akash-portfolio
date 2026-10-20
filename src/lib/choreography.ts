@@ -11,11 +11,13 @@ import { sceneStore } from './sceneStore'
  * remain — the devices are still 3D, just static. Amplitudes are smaller on narrow screens.
  *
  *   hero exit        → heroT drives the WebGL scene; hero copy drifts up and fades
- *   floor            → a perspective grid slides in under the first project
+ *   floors           → a perspective grid slides in under the first project, and at the top of Skills, Contact and the footer
  *   each project     → the device rig swings in with depth (rotate / rise / push back to front), layers drift at
  *                      different speeds (parallax), then the rig turns away slightly as the section leaves
  *   about            → the About sheet rises over the last project (which recedes); heading wipes in; the
  *                      timeline's spine draws as you scroll and each entry slides in
+ *   every section    → [data-fly] blocks swing up out of depth (rotate / rise / push forward) as they arrive, the huge
+ *                      section numerals drift on their own parallax, and the footer mark turns to face you
  */
 export function useChoreography() {
   useEffect(() => {
@@ -46,11 +48,12 @@ export function useChoreography() {
       }
 
       /* ---- dimensional floor between hero and work ------------------------------------------------------------ */
-      const floor = q('[data-floor]')[0]
-      if (floor) {
-        gsap.fromTo(floor, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: '#work', start: 'top bottom', end: 'top 55%', scrub: true } })
-        gsap.to(floor.firstElementChild, { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '#work', start: 'top bottom', end: 'top -40%', scrub: true } })
-      }
+      q('[data-floor]').forEach((floor) => {
+        const section = floor.parentElement
+        if (!section) return
+        gsap.fromTo(floor, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'top 55%', scrub: true } })
+        gsap.to(floor.firstElementChild, { yPercent: 12, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'top -40%', scrub: true } })
+      })
 
       /* ---- each project -------------------------------------------------------------------------------------- */
       q('[data-project]').forEach((section, i) => {
@@ -108,6 +111,25 @@ export function useChoreography() {
       q('[data-entry]').forEach((entry) => {
         gsap.fromTo(entry, { opacity: 0, x: wide ? -36 : -16, rotationY: wide ? -8 : 0 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: entry, start: 'top 85%', toggleActions: 'play none none none' } })
       })
+
+      /* ---- depth for every other section ------------------------------------------------------------------------ */
+      q('[data-fly]').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: wide ? 80 : 36, z: wide ? -200 : -80, rotationX: wide ? 16 : 7, transformPerspective: 1200, transformOrigin: '50% 100%' },
+          { opacity: 1, y: 0, z: 0, rotationX: 0, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 94%', end: 'top 58%', scrub: 0.7 } },
+        )
+      })
+      if (wide) {
+        q('[data-numeral]').forEach((el) => {
+          const section = el.parentElement
+          if (section) gsap.fromTo(el, { yPercent: -16 }, { yPercent: 16, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true } })
+        })
+      }
+      const mark = q('[data-mark]')[0]
+      if (mark) {
+        gsap.fromTo(mark, { rotationY: wide ? -55 : -30, opacity: 0.2, transformPerspective: 700, transformOrigin: '0 50%' }, { rotationY: 0, opacity: 1, ease: 'power2.out', scrollTrigger: { trigger: mark, start: 'top 98%', end: 'top 70%', scrub: 0.6 } })
+      }
 
       // images and fonts change section heights after hydration; keep the triggers honest
       const refresh = () => ScrollTrigger.refresh()

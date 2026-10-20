@@ -5,9 +5,11 @@
     radial-gradient(60% 50% at 80% 0%, var(--lime-a08), transparent 70%),
     var(--ink-1);
   border-top: 1px solid var(--line-1);
+  overflow-x: clip;
 }
 
 .inner {
+  position: relative;
   display: grid;
   gap: var(--space-8);
   max-width: var(--maxw);
@@ -17,6 +19,15 @@
 .grid {
   display: grid;
   gap: var(--space-8);
+}
+
+/* the form sits on its own plate */
+.formCard {
+  padding: var(--space-6);
+  border: var(--border);
+  border-radius: var(--r-3);
+  background: linear-gradient(180deg, var(--ink-2), var(--ink-1));
+  box-shadow: var(--shadow-1);
 }
 
 .direct {

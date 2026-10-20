@@ -4,7 +4,8 @@ import { projects } from '../content/projects'
 import styles from './resume.module.css'
 
 /**
- * Printable résumé (A4). `npm run resume` prints this page to /public/Akash-Ganapathy-Resume.pdf.
+ * Printable résumé (A4) built from the site data. `npm run resume` prints it to assets/generated/ — the downloadable
+ * résumé the site serves is the author's own file, public/Akash-Ganapathy-Resume.pdf.
  * It only restates what is on the site — supplied contact details, roles, education and skills; no metrics are added.
  */
 export default function Resume() {

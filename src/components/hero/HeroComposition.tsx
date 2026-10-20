@@ -7,9 +7,9 @@ import { Scene, Slot } from '../work/Scene'
 export function HeroComposition() {
   return (
     <Scene aspect={1.7} label="BreakFit and Validate on phones and the IoT dashboard in a browser window">
-      <Slot x={21} y={4} w={62} depth={-0.2} pose="translateZ(-80px) rotateY(-17deg) rotateX(6deg)" z={1}>
+      <Slot x={14} y={9} w={67} depth={-0.2} pose="translateZ(-80px) rotateY(-17deg) rotateX(6deg)" z={1}>
         {(v) => (
-          <BrowserDevice style={v} image={img('iot', 'dashboard')} alt="IoT Observability fleet overview dashboard." label="iot-dashboard-snowy.vercel.app" secure sizes="(min-width: 900px) 40vw, 90vw" />
+          <BrowserDevice style={v} image={img('iot', 'hero')} alt="IoT Observability analytics dashboard: network quality distribution, circle-wise issues, customer impact and the reporting, high-risk and monthly network trends." label="iot-dashboard-snowy.vercel.app" secure sizes="(min-width: 900px) 40vw, 90vw" />
         )}
       </Slot>
       <Slot x={4} y={22} w={21} depth={0.5} pose="translateZ(100px) rotateY(24deg) rotateZ(-3deg)" z={2}>

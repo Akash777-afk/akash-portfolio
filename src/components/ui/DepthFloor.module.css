@@ -1,0 +1,27 @@
+/* The horizon sits at the top edge; the plane recedes from the bottom of the box up to it. The plane is kept short
+   enough that its near edge stays well in front of the camera (perspective 800px, plane ≈ 44rem at 74°), so nothing
+   crosses the viewer and the projection stays stable. */
+.floor {
+  --strength: 1;
+  position: absolute;
+  inset: 0 0 auto 0;
+  overflow: hidden;
+  perspective: 800px;
+  perspective-origin: 50% 0;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 12%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, transparent 100%);
+}
+
+.grid {
+  position: absolute;
+  left: -70%;
+  right: -70%;
+  top: 0;
+  height: 44rem;
+  background:
+    linear-gradient(rgba(200, 255, 46, calc(0.5 * var(--strength))) 1px, transparent 1px) 0 0 / 100% 4rem,
+    linear-gradient(90deg, rgba(200, 255, 46, calc(0.4 * var(--strength))) 1px, transparent 1px) 0 0 / 5rem 100%;
+  transform: rotateX(74deg);
+  transform-origin: 50% 0;
+}

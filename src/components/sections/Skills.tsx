@@ -1,8 +1,11 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useId, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
+import { useId, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
 import { portfolioBuildStack, skillGroups } from '../../content/profile'
+import { DepthFloor } from '../ui/DepthFloor'
+import { Numeral } from '../ui/Numeral'
 import { Reveal } from '../ui/Reveal'
 import { SectionHeading } from '../ui/SectionHeading'
+import { Slab } from '../ui/Slab'
 import styles from './Skills.module.css'
 
 /**
@@ -57,6 +60,8 @@ export function Skills() {
 
   return (
     <section id="skills" className={styles.skills} aria-labelledby="skills-title">
+      <DepthFloor height="26rem" strength={0.5} />
+      <Numeral>03</Numeral>
       <div className={styles.inner}>
         <Reveal>
           <SectionHeading
@@ -67,7 +72,7 @@ export function Skills() {
           />
         </Reveal>
 
-        <div className={styles.console}>
+        <div className={styles.console} data-fly>
           <div className={styles.tabs} role="tablist" aria-label="Skill groups" onKeyDown={onKeyDown}>
             {skillGroups.map((g, i) => (
               <button
@@ -101,6 +106,9 @@ export function Skills() {
 
           <div ref={panel} className={styles.stage} onPointerMove={onMove} onPointerLeave={onLeave}>
             <div className={styles.frame}>
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <i key={i} className={styles.depth} style={{ '--i': i } as CSSProperties} aria-hidden="true" />
+              ))}
               <span className={`${styles.tick} ${styles.tl}`} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.tr}`} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.bl}`} aria-hidden="true" />
@@ -133,10 +141,12 @@ export function Skills() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.35, delay: 0.025 * i, ease: [0.16, 1, 0.3, 1] }}
                       >
-                        <span className={styles.tileIndex} aria-hidden="true">
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <span className={styles.tileName}>{skill}</span>
+                        <Slab className={styles.tileFace} layers={4} ry={-6} rx={2} tilt={7} radius="var(--r-2)">
+                          <span className={styles.tileIndex} aria-hidden="true">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+                          <span className={styles.tileName}>{skill}</span>
+                        </Slab>
                       </motion.li>
                     ))}
                   </ul>

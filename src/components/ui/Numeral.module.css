@@ -1,0 +1,39 @@
+.numeral {
+  position: absolute;
+  top: 3%;
+  right: calc(var(--gutter) - 1rem);
+  user-select: none;
+  pointer-events: none;
+}
+
+.numeral[data-side='left'] {
+  right: auto;
+  left: calc(var(--gutter) - 1rem);
+}
+
+.glyph {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(9rem, 28vw, 26rem);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: var(--ink-3);
+  opacity: 0.6;
+  text-shadow:
+    1px 1px 0 var(--ink-4),
+    2px 2px 0 var(--ink-4),
+    3px 3px 0 var(--ink-3),
+    4px 4px 0 var(--ink-3),
+    5px 5px 0 var(--ink-2),
+    6px 6px 0 var(--ink-2),
+    7px 7px 0 var(--ink-2),
+    8px 8px 0 var(--ink-1);
+  transform: perspective(900px) rotateY(-16deg);
+  transform-origin: 100% 50%;
+}
+
+.numeral[data-side='left'] .glyph {
+  transform: perspective(900px) rotateY(16deg);
+  transform-origin: 0 50%;
+}

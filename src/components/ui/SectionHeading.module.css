@@ -28,6 +28,13 @@
   line-height: var(--lh-snug);
   letter-spacing: var(--tracking-display);
   text-wrap: balance;
+  /* a stepped, dark extrusion so the heading reads as a solid with depth (scales with the type) */
+  text-shadow:
+    0.014em 0.014em 0 #1e2328,
+    0.028em 0.028em 0 #1a1e23,
+    0.042em 0.042em 0 #161a1f,
+    0.056em 0.056em 0 #12151a,
+    0.07em 0.09em 0.12em rgba(0, 0, 0, 0.6);
 }
 
 .lead {

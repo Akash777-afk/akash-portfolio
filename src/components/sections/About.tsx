@@ -1,8 +1,10 @@
 import { aboutIntro, education, experience, profile } from '../../content/profile'
 import { Button } from '../ui/Button'
 import { Chip } from '../ui/Chip'
+import { Numeral } from '../ui/Numeral'
 import { Reveal } from '../ui/Reveal'
 import { SectionHeading } from '../ui/SectionHeading'
+import { Slab } from '../ui/Slab'
 import { ContactDetails } from './ContactDetails'
 import styles from './About.module.css'
 
@@ -10,12 +12,13 @@ import styles from './About.module.css'
 export function About() {
   return (
     <section id="about" className={styles.about} aria-labelledby="about-title">
+      <Numeral>02</Numeral>
       <div className={styles.inner}>
         <div data-wipe className={styles.wipe}>
           <SectionHeading eyebrow="02 — About" id="about-title" title={aboutIntro.heading} />
         </div>
 
-        <div className={styles.intro}>
+        <div className={styles.intro} data-fly>
           <Reveal className={styles.copy}>
             {aboutIntro.paragraphs.map((p) => (
               <p key={p}>{p}</p>
@@ -45,7 +48,7 @@ export function About() {
             {experience.map((role) => (
               <li key={role.id} className={styles.entry} data-entry>
                 <span className={styles.node} aria-hidden="true" data-current={role.current ? 'true' : undefined} />
-                <article className={styles.card}>
+                <Slab as="article" className={styles.card} ry={-5} rx={1.5} tilt={3}>
                   <p className={styles.period}>
                     {role.period}
                     {role.current && <Chip tone="lime">Current</Chip>}
@@ -61,7 +64,7 @@ export function About() {
                       <li key={r}>{r}</li>
                     ))}
                   </ul>
-                </article>
+                </Slab>
               </li>
             ))}
           </ol>
@@ -71,12 +74,14 @@ export function About() {
           <h3 className={styles.blockTitle}>
             <span>Education</span>
           </h3>
-          <ul className={styles.education}>
+          <ul className={styles.education} data-fly>
             {education.map((e, i) => (
-              <Reveal as="li" key={e.degree} delay={i * 0.08} className={styles.edu}>
-                <p className={styles.eduYear}>{e.year}</p>
-                <h4 className={styles.eduDegree}>{e.degree}</h4>
-                {e.institution && <p className={styles.eduPlace}>{e.institution}</p>}
+              <Reveal as="li" key={e.degree} delay={i * 0.08} className={styles.eduItem}>
+                <Slab className={styles.edu} ry={i % 2 === 0 ? 5 : -5} rx={1.5} tilt={3} radius="0 var(--r-3) var(--r-3) 0">
+                  <p className={styles.eduYear}>{e.year}</p>
+                  <h4 className={styles.eduDegree}>{e.degree}</h4>
+                  {e.institution && <p className={styles.eduPlace}>{e.institution}</p>}
+                </Slab>
               </Reveal>
             ))}
           </ul>

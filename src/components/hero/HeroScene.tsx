@@ -96,7 +96,7 @@ function Phone({ url, aspect }: { url: string; aspect: number }) {
 
 function Browser({ url, aspect }: { url: string; aspect: number }) {
   const tex = useScreenTexture(url)
-  const sw = 4.3
+  const sw = 5.1 // wide screenshot (≈2.3:1): a wider window keeps its panels legible next to the tall phones
   const sh = sw / aspect
   const bar = 0.3
   const body = useMemo(() => slab(sw + 0.17, sh + bar + 0.17, 0.16, 0.12), [sh])
@@ -156,14 +156,14 @@ function Devices({ t, compact }: { t: HeroTextureUrls; compact: boolean }) {
       g.rotation.z += (Math.sin(time * 0.4 + seed) * 0.012 - g.rotation.z) * 0.05
     }
     float(a.current, 0.4, compact ? -0.45 : -0.55, 0.07)
-    float(b.current, 1.7, compact ? 0.2 : 0.25, 0.05)
+    float(b.current, 1.7, compact ? 0.2 : 0.3, 0.05)
     float(c.current, 3.1, compact ? -0.8 : -0.9, 0.08)
   })
 
   const sc = compact ? 0.78 : 1
   return (
     <group ref={root} scale={sc}>
-      <group ref={b} position={[0.7, 0.25, -1.4]} rotation={[0.05, -0.36, 0]}>
+      <group ref={b} position={[0.55, 0.3, -1.4]} rotation={[0.05, -0.36, 0]}>
         <Browser url={t.browser} aspect={t.browserAspect} />
       </group>
       <group ref={a} position={[-2.7, -0.55, 0.5]} rotation={[0.04, 0.4, 0.05]}>

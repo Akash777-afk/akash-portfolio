@@ -1,0 +1,74 @@
+/* The perspective lives on the wrapper, so every slab has its own vanishing point at its centre. */
+.wrap {
+  position: relative;
+  perspective: 1400px;
+  min-width: 0;
+}
+
+.slab {
+  --px: 0;
+  --py: 0;
+  --ry: 0deg;
+  --rx: 0deg;
+  --tilt: 4;
+  --radius: var(--r-3);
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateZ(0) rotateX(calc(var(--rx) + var(--py) * var(--tilt) * -1deg)) rotateY(calc(var(--ry) + var(--px) * var(--tilt) * 1deg));
+  transition: transform var(--dur-3) var(--ease-out);
+}
+
+/* thickness: stacked plates behind the face, each a little deeper and darker */
+.layer {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, #262b32, #0f1216);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  transform: translateZ(calc(var(--i) * -4px));
+  pointer-events: none;
+}
+
+/* a soft contact shadow, so the slab seems to hover just above the page */
+.slab::after {
+  content: '';
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: -0.9rem;
+  height: 1.4rem;
+  background: radial-gradient(ellipse at 50% 40%, rgba(0, 0, 0, 0.6), transparent 70%);
+  transform: translateZ(-34px);
+  pointer-events: none;
+}
+
+.face {
+  position: relative;
+  height: 100%;
+  border-radius: var(--radius);
+  transform: translateZ(0.5px);
+}
+
+@media (hover: hover) {
+  .wrap:hover .slab {
+    transform: translateZ(10px) rotateX(calc(var(--rx) + var(--py) * var(--tilt) * -1deg)) rotateY(calc(var(--ry) + var(--px) * var(--tilt) * 1deg));
+  }
+}
+
+/* phones: fewer layers keep it light */
+@media (max-width: 899px) {
+  .layer:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slab {
+    transition: none;
+  }
+
+  .wrap:hover .slab {
+    transform: translateZ(0) rotateX(var(--rx)) rotateY(var(--ry));
+  }
+}

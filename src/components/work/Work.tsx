@@ -1,5 +1,6 @@
 import { projects } from '../../content/projects'
 import { SectionHeading } from '../ui/SectionHeading'
+import { DepthFloor } from '../ui/DepthFloor'
 import { Reveal } from '../ui/Reveal'
 import { ProjectSection } from './ProjectSection'
 import styles from './Work.module.css'
@@ -12,9 +13,7 @@ export function Work() {
   return (
     <div id="work" className={styles.work}>
       {/* a perspective floor the hero's devices appear to fly over (scroll-linked, decorative) */}
-      <div className={styles.floor} aria-hidden="true" data-floor>
-        <div className={styles.grid} />
-      </div>
+      <DepthFloor height="36rem" strength={0.75} />
 
       <header className={styles.header}>
         <Reveal>

@@ -2,14 +2,18 @@ import Link from 'next/link'
 import { profile } from '../../content/profile'
 import { primaryLink, projects } from '../../content/projects'
 import { ExternalGlyph } from '../ui/Button'
+import { DepthFloor } from '../ui/DepthFloor'
 import styles from './Footer.module.css'
 
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.inner}>
+      <DepthFloor height="22rem" strength={0.7} />
+      <div className={styles.inner} data-fly>
         <div className={styles.lead}>
-          <p className={styles.mark}>AG</p>
+          <p className={styles.markWrap} data-mark>
+            <span className={styles.mark}>AG</span>
+          </p>
           <p className={styles.statement}>Designed and built by {profile.name}.</p>
           <p className={styles.where}>{profile.location}</p>
           <a className={styles.mail} href={`mailto:${profile.email}`}>

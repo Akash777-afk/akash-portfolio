@@ -10,7 +10,7 @@ npm run start        # http://localhost:3100  (serves the production build)
 npm run typecheck    # tsc --noEmit
 npm run assets       # re-generate /public/work (WebP + src/content/assets.generated.json) from the source screenshots
 npm run capture      # re-capture screenshots from the live apps (needs local Chrome)
-npm run resume       # print /resume to public/Akash-Ganapathy-Resume.pdf (the server must be running on :3100)
+npm run resume       # print the site-data /resume page to assets/generated/ (server on :3100) — does not touch the served résumé
 npm run check:links  # list every external link, flag provisional ones (--strict exits 1 if any are provisional)
 ```
 
@@ -34,6 +34,7 @@ npm run check:links  # list every external link, flag provisional ones (--strict
 - `src/components/hero` — the hero. **A translucent glass panel** (graphite, `backdrop-filter: blur(22px) saturate(1.4)`, 1 px low-contrast border, inner highlight, restrained shadow) carries the name, role, pitch and CTAs. On ≥ 1000 px the panel is the left column and the device scene the right one, so text and devices never share a box; below that the scene sits above the panel. The name is sized to the panel (`cqw`), not the viewport. Without `backdrop-filter` support the panel falls back to a near-opaque plate (`@supports`), so the copy never depends on blur.
 - `src/components/devices` — CSS-3D `PhoneDevice`, `BrowserDevice` (stacked thickness layers, glare, reflections) and `FloatingPanel`. `src/components/work` — each project's composition (`Scene`, `Slot`) and section.
 - `src/components/sections` — About (timeline, education, contact), Skills (four tabs), Contact.
+- `src/components/ui/Slab` — the 3D building block used by every card outside the project sections: a perspective wrapper, a preserve-3d slab, 4–6 stacked thickness layers behind the face (3 on phones), a resting angle so its edges show, a contact shadow, and pointer tilt (mouse only). `DepthFloor` (a perspective lime grid receding to a horizon at the top of Work, Skills, Contact and the footer) and `Numeral` (huge extruded 02/03/04) complete the set.
 - `scripts/assets.config.js` — which source image becomes which asset. Real screenshots only; nothing is generated.
 
 ## Links
@@ -50,7 +51,14 @@ All external links open in a new tab with `rel="noopener noreferrer"`.
 
 ## Résumé
 
-`/resume` is a print layout built from the same data as the site; `npm run resume` prints it to `public/Akash-Ganapathy-Resume.pdf` (A4, one page). Restart `next start` after regenerating — files added to `public/` after start are not served by the production server. The old `Main_Resume.pdf` in Downloads was **not** used: it has a different phone number and different Fosters dates.
+**The "Download résumé" buttons (About, Contact, footer) serve `public/Akash-Ganapathy-Resume.pdf`, which is the résumé file the author supplied (`Resume.pdf`), byte for byte.** To change the résumé, replace that file and restart `next start` (files added to `public/` after start are not served by the production server). `/resume` is a separate print layout built from the site data; `npm run resume` prints it to `assets/generated/` and never overwrites the supplied file. Note the supplied PDF itself still contains the earlier email address (`akashganapathy367@gmail.com`); the site's contact email is `akashg07199@gmail.com`.
+
+## How the 3D works across the page
+
+- **Hero:** WebGL (three + react-three-fiber), lazy-loaded; the CSS-3D composition is the fallback.
+- **Projects:** CSS-3D device compositions (stacked layers, perspective, scroll-scrubbed swing-in and parallax).
+- **About / Skills / Contact / footer:** every card is a `Slab` — timeline entries, education, contact details, the contact form (with recessed fields), the skills console (thick frame) and each skill tile. Tabs and buttons are keycaps with a visible side wall that drops when pressed. Headings carry a stepped extrusion, the section numerals and the footer mark are extruded solids, and each region (`[data-fly]`) swings up out of depth as it scrolls in (GSAP, scrubbed, never pinned).
+- All text, links and form fields remain real DOM; the thickness layers are pointer-transparent, so everything stays clickable. Under `prefers-reduced-motion` the slabs keep their resting pose and thickness but nothing tilts, flies or transitions.
 
 ## Accessibility and motion
 
@@ -58,13 +66,14 @@ Contrast tokens are ≥ 4.6:1; the hero copy measured 7.6:1–17.6:1 against the
 
 ## Verified (production build, headless Chrome)
 
-- 72 acceptance checks: exactly three projects, every link target and `rel`, external navigation to the real apps, 3D by default (default / reduced-motion / mobile), ScrollTrigger behaviour, About/education/contact content, Skills groups, keyboard paths, contact form, résumé download, route 404s.
+- 29 checks for the 3D system (`pf-3d`): slab construction on desktop and mobile, resting angles, hit-testing of links, copy buttons and form fields through the 3D stack, pointer tilt and return, keycap press, extruded numerals / headings / footer mark, floors, scroll fly-in, reduced motion.
+- 75 acceptance checks (including a real click-to-download of the résumé compared byte for byte with the supplied file): exactly three projects, every link target and `rel`, external navigation to the real apps, 3D by default (default / reduced-motion / mobile), ScrollTrigger behaviour, About/education/contact content, Skills groups, keyboard paths, contact form, résumé download, route 404s.
 - 40 hero checks: panel styling (blur + saturation, translucent but dark enough, thin border, radius, shadow), all copy inside the panel and the name unclipped at 1920, 1440, 1280, 1366×640, 1024, 1000, 768, 390, 360 and 320 px, no panel/scene overlap, CTAs inside the first screen on desktop, worst-case contrast of every text element against the real backdrop, and the no-`backdrop-filter` fallback.
 - axe-core: 0 violations on home (3D top, 3D fully scrolled, reduced motion, mobile), `/resume` and `404`. No horizontal overflow 320–1920 px, touch targets ≥ 44 px at 390 px.
 
 ## Known limitations
 
-- **IoT dashboard image.** The site currently uses the IoT dashboard captured earlier from the live app (`public/work/iot/*`). A newly supplied IoT screenshot could not be located in the workspace (see the hand-over notes); it has **not** been swapped in. Once the file path is known, add it to `scripts/assets.config.js` as the `iot/dashboard` source and run `npm run assets` — the hero textures, the browser frame and the three floating panel crops are all derived from that one source.
+- **IoT screenshots.** The hero shows the analytics screen you supplied (`assets/source/iot-analytics.png`, 1918×825, resized only → `public/work/iot/hero-*.webp`). The IoT project section still shows the earlier fleet-overview capture and its three panel crops (`iot/dashboard`, `iot/panel-*`). To use the new screen there too, point `iot/dashboard` in `scripts/assets.config.js` at it and re-pick the panel crops, then run `npm run assets`.
 - **Validate has no desktop or mobile app screens** beyond the author's cover; the phone screen is extracted from the cover with a perspective warp (real pixels, not redrawn).
 - **Behance blocks automated requests (HTTP 403)**, so those links can only be confirmed by opening them in a browser.
 - **3D performance on real GPUs is untested.** Headless Chrome uses software WebGL; a pixel-ratio governor and the CSS fallback exist for slow devices, but try it on real hardware.

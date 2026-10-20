@@ -1,12 +1,13 @@
 import { profile } from '../../content/profile'
 import { CopyButton } from '../ui/CopyButton'
+import { Slab } from '../ui/Slab'
 import styles from './ContactDetails.module.css'
 
 /** Name, location, phone and email — real tel:/mailto: links with correct copy-to-clipboard. No social profiles are invented. */
 export function ContactDetails({ headingLevel = 'h3' }: { headingLevel?: 'h2' | 'h3' }) {
   const Heading = headingLevel
   return (
-    <div className={styles.card}>
+    <Slab className={styles.card} ry={-4} rx={1} tilt={3}>
       <Heading className={styles.title}>Contact details</Heading>
       <dl className={styles.list}>
         <div className={styles.row}>
@@ -36,6 +37,6 @@ export function ContactDetails({ headingLevel = 'h3' }: { headingLevel?: 'h2' | 
           </dd>
         </div>
       </dl>
-    </div>
+    </Slab>
   )
 }

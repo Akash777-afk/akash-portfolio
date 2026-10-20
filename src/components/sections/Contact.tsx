@@ -1,7 +1,10 @@
 import { profile } from '../../content/profile'
 import { Button } from '../ui/Button'
+import { DepthFloor } from '../ui/DepthFloor'
+import { Numeral } from '../ui/Numeral'
 import { Reveal } from '../ui/Reveal'
 import { SectionHeading } from '../ui/SectionHeading'
+import { Slab } from '../ui/Slab'
 import { ContactDetails } from './ContactDetails'
 import { ContactForm } from './ContactForm'
 import styles from './Contact.module.css'
@@ -9,6 +12,8 @@ import styles from './Contact.module.css'
 export function Contact() {
   return (
     <section id="contact" className={styles.contact} aria-labelledby="contact-title">
+      <DepthFloor height="26rem" strength={0.5} />
+      <Numeral>04</Numeral>
       <div className={styles.inner}>
         <Reveal>
           <SectionHeading
@@ -19,9 +24,11 @@ export function Contact() {
           />
         </Reveal>
 
-        <div className={styles.grid}>
+        <div className={styles.grid} data-fly>
           <Reveal className={styles.formWrap}>
-            <ContactForm />
+            <Slab className={styles.formCard} ry={4} rx={1} tilt={2}>
+              <ContactForm />
+            </Slab>
           </Reveal>
 
           <Reveal delay={0.1} className={styles.direct}>

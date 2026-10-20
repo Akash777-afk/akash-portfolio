@@ -11,7 +11,7 @@ export const profile = {
   phone: '+91 9944601512',
   /** E.164 form for the tel: link */
   phoneHref: 'tel:+919944601512',
-  email: 'akashganapathy367@gmail.com',
+  email: 'akashg07199@gmail.com',
   siteTitle: 'Akash Ganapathy — UI/UX Designer & Frontend Developer',
   description:
     'UI/UX designer and frontend developer in Chennai, India. Enterprise interface design, Figma prototyping and Angular / React implementation — plus BreakFit, an IoT monitoring dashboard and the Validate case study.',

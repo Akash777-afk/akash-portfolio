@@ -45,7 +45,7 @@ export function HeroSceneHost({ active }: { active: boolean }) {
 
   const textures = useMemo(() => {
     const phoneA = img('breakfit', 'home')
-    const browser = img('iot', 'dashboard')
+    const browser = img('iot', 'hero')
     const phoneB = img('validate', 'phone')
     const pick = (i: ReturnType<typeof img>) => (flags.lite ? i.small : i.src)
     return {

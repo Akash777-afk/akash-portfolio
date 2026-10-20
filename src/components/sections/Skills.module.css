@@ -5,9 +5,11 @@
     radial-gradient(50% 40% at 85% 10%, var(--lime-a08), transparent 70%),
     var(--ink-0);
   border-top: 1px solid var(--line-1);
+  overflow-x: clip;
 }
 
 .inner {
+  position: relative;
   display: grid;
   gap: var(--space-8);
   max-width: var(--maxw);
@@ -41,11 +43,25 @@
   font-family: var(--font-body);
   font-weight: 600;
   color: var(--text-2);
+  /* a keycap: a lit top face over a visible side wall */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 0.22rem 0 #05060808,
+    0 0.22rem 0 var(--ink-4),
+    0 0.5rem 0.8rem -0.2rem rgba(0, 0, 0, 0.6);
   transition:
     border-color var(--dur-2) ease,
     background-color var(--dur-2) ease,
     color var(--dur-2) ease,
-    transform var(--dur-2) var(--ease-out);
+    transform var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) ease;
+}
+
+.tab:active {
+  transform: translateY(0.18rem);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0.04rem 0 var(--ink-4);
 }
 
 .tabIndex,
@@ -64,6 +80,10 @@
   border-color: var(--lime-500);
   background: linear-gradient(180deg, var(--lime-a16), var(--lime-a08));
   color: var(--text-1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0.22rem 0 #3b4d0a,
+    0 0.5rem 0.8rem -0.2rem rgba(0, 0, 0, 0.6);
 }
 
 .tab[aria-selected='true'] .tabIndex,
@@ -100,8 +120,21 @@
     linear-gradient(90deg, var(--line-1) 1px, transparent 1px) 0 0 / 1.5rem 100%,
     linear-gradient(180deg, var(--ink-2), var(--ink-1));
   box-shadow: var(--shadow-2);
-  transform: rotateY(calc(var(--px) * 3deg)) rotateX(calc(var(--py) * -2.5deg));
+  transform-style: preserve-3d;
+  transform-origin: 50% 40%;
+  transform: rotateX(calc(3deg + var(--py) * -2.5deg)) rotateY(calc(var(--px) * 3deg));
   transition: transform var(--dur-3) var(--ease-out);
+}
+
+/* the console's thickness: plates stacked behind the frame */
+.depth {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-3);
+  background: linear-gradient(145deg, #1f242b, #0b0d10);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  transform: translateZ(calc(var(--i) * -3px));
+  pointer-events: none;
 }
 
 .tick {
@@ -172,6 +205,10 @@
 }
 
 .tile {
+  min-width: 0;
+}
+
+.tileFace {
   display: grid;
   gap: var(--space-1);
   align-content: space-between;
@@ -179,11 +216,10 @@
   padding: var(--space-3);
   border: 1px solid var(--line-2);
   border-radius: var(--r-2);
-  background: rgba(8, 9, 11, 0.7);
+  background: linear-gradient(180deg, rgba(19, 22, 27, 0.95), rgba(8, 9, 11, 0.9));
   box-shadow: 0 0.5rem 1rem -0.5rem rgba(0, 0, 0, 0.6);
   transition:
     border-color var(--dur-2) ease,
-    transform var(--dur-3) var(--ease-out),
     box-shadow var(--dur-3) ease;
 }
 
@@ -201,9 +237,8 @@
 }
 
 @media (hover: hover) {
-  .tile:hover {
+  .tileFace:hover {
     border-color: var(--lime-500);
-    transform: translateY(-3px) translateZ(12px);
     box-shadow: 0 1rem 1.6rem -0.6rem rgba(0, 0, 0, 0.7), 0 0 0 1px var(--lime-a32);
   }
 }
@@ -287,11 +322,11 @@
 
 @media (prefers-reduced-motion: reduce) {
   .frame {
-    transform: none;
+    transform: rotateX(3deg);
     transition: none;
   }
 
-  .tile,
+  .tileFace,
   .tab {
     transition: none;
   }
