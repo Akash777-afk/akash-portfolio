@@ -5,10 +5,9 @@ import { Numeral } from '../ui/Numeral'
 import { Reveal } from '../ui/Reveal'
 import { SectionHeading } from '../ui/SectionHeading'
 import { Slab } from '../ui/Slab'
-import { ContactDetails } from './ContactDetails'
 import styles from './About.module.css'
 
-/** About: the introduction, the experience timeline, education and contact details. Sits over the last project like a sheet. */
+/** About: the introduction, the experience timeline and education. Sits over the last project like a sheet. (Contact details live in the Contact section.) */
 export function About() {
   return (
     <section id="about" className={styles.about} aria-labelledby="about-title">
@@ -19,8 +18,11 @@ export function About() {
         </div>
 
         <div className={styles.intro} data-fly>
-          <Reveal className={styles.copy}>
-            {aboutIntro.paragraphs.map((p) => (
+          <Reveal>
+            <p className={styles.statement}>{aboutIntro.paragraphs[0]}</p>
+          </Reveal>
+          <Reveal delay={0.1} className={styles.how}>
+            {aboutIntro.paragraphs.slice(1).map((p) => (
               <p key={p}>{p}</p>
             ))}
             <div className={styles.actions}>
@@ -31,9 +33,6 @@ export function About() {
                 Contact me
               </Button>
             </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <ContactDetails />
           </Reveal>
         </div>
 

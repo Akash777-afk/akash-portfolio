@@ -8,87 +8,31 @@
   overflow: clip;
 }
 
-/* spatial grid + a faint lime horizon glow, drawn in CSS (cheap) */
-.backdrop {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(60% 50% at 78% 70%, var(--lime-a08), transparent 70%),
-    linear-gradient(var(--line-1) 1px, transparent 1px) 0 0 / 100% 7.5rem,
-    linear-gradient(90deg, var(--line-1) 1px, transparent 1px) 0 0 / 7.5rem 100%;
-  mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
-}
-
-/* ---- glass visual ---------------------------------------------------------------------------------------------
-   mobile / tablet: a block above the copy.  desktop: the right-hand column, clear of the panel and the nav. */
-.visual {
-  position: relative;
-  width: 100%;
-  max-width: 40rem;
-  margin: var(--space-4) auto 0;
-  aspect-ratio: 1.45;
-}
-
-/* portrait tablets show the second floating card, which hangs below the object: leave it room above the copy */
-@media (min-width: 560px) and (max-width: 999px) {
-  .visual {
-    aspect-ratio: 1.35;
-    margin-bottom: var(--space-5);
-  }
-}
-
-/* ---- glass panel ----------------------------------------------------------------------------------------------
-   One translucent graphite plate behind the name, role, pitch and CTAs. It is its own size container so the name can
-   be fitted to the panel (cqw) instead of the viewport.  Without backdrop-filter it falls back to a near-opaque plate. */
+/* ---- the copy -----------------------------------------------------------------------------------------------------
+   No card: the type sits straight on the page. The block is anchored a fixed distance below the nav (not re-centred), so
+   when the web fonts swap in and a line re-wraps, it only grows downward and nothing jumps. It is its own size
+   container, so the name is fitted to the column (cqw) rather than to the viewport. */
 .content {
   position: relative;
   z-index: 1;
   container-type: inline-size;
   display: grid;
+  justify-items: start;
   gap: var(--space-5);
   width: 100%;
-  max-width: 50rem;
-  margin-bottom: var(--space-6);
-  padding: clamp(1.25rem, 0.9rem + 1.6vw, 2.5rem);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: clamp(1.25rem, 1rem + 1.2vw, 2rem);
-  background: rgba(11, 13, 16, 0.92);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.015),
-    0 28px 64px -28px rgba(0, 0, 0, 0.75),
-    0 6px 18px -8px rgba(0, 0, 0, 0.5);
+  max-width: var(--maxw);
+  margin: clamp(var(--space-4), 4.5svh, 4rem) auto var(--space-6);
 }
 
-@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-  .content {
-    background: linear-gradient(150deg, rgba(34, 39, 46, 0.58) 0%, rgba(14, 16, 20, 0.6) 55%, rgba(9, 10, 13, 0.66) 100%);
-    -webkit-backdrop-filter: blur(22px) saturate(1.4);
-    backdrop-filter: blur(22px) saturate(1.4);
-  }
-}
-
-/* soft top-left sheen, clipped to the plate */
-.content::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background: radial-gradient(120% 70% at 0% 0%, rgba(255, 255, 255, 0.07), transparent 55%);
-  pointer-events: none;
-}
-
-/* the name is fitted to the panel (9 wide capitals → ~8.1em), never wider than the global hero size */
+/* GANAPATHY is nine wide capitals ≈ 8.1em: 11.7cqw keeps it inside the column at every width; the svh term stops the two
+   lines from outgrowing a short screen */
 .content .name {
   font-size: clamp(2rem, 8.4vw, var(--fs-hero));
 }
 
 @supports (width: 1cqw) {
   .content .name {
-    font-size: min(var(--fs-hero), 11.7cqw);
+    font-size: min(10rem, 11.7cqw, 18svh);
   }
 }
 
@@ -118,35 +62,40 @@
   }
 }
 
-.lower {
-  display: grid;
-  gap: var(--space-4);
-  max-width: 40rem;
-}
-
+/* UI/UX DESIGNER × FRONTEND DEVELOPER — one line when it fits, breaking only between the two halves when it does not */
 .role {
   font-family: var(--font-display);
-  font-size: var(--fs-h3);
+  font-size: clamp(1rem, 0.62rem + 1.55vw, 1.75rem);
   font-weight: 600;
-  letter-spacing: var(--tracking-display);
-  line-height: 1.15;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  text-transform: uppercase;
 }
 
-/* always two lines, so the web-font swap can never re-wrap it and push the pitch down */
 .roleLine {
-  display: block;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .times {
-  margin-inline: 0.15em;
+  display: inline-block;
+  margin-inline: 0.2em 0.1em;
   color: var(--lime-500);
+  transition: transform var(--dur-3) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .role:hover .times {
+    transform: rotate(90deg);
+  }
 }
 
 .intro {
-  max-width: 36rem;
+  max-width: 42rem;
   font-size: var(--fs-lead);
   line-height: 1.5;
   color: var(--text-2);
+  text-wrap: pretty;
 }
 
 .cta {
@@ -163,56 +112,27 @@
   margin-top: auto;
 }
 
-/* two columns: the glass panel on the left, the device scene on the right — text and devices never share a box */
-@media (min-width: 1000px) {
-  .hero {
-    justify-content: flex-start;
-  }
-
+/* phones: stacked, full-width, easy-to-tap buttons */
+@media (max-width: 559px) {
   .content {
-    width: clamp(32rem, 50vw, 50rem);
-    max-width: none;
-    /* roughly centred between the nav and the ticker, but anchored from the top: when the web fonts swap in and the
-       copy re-wraps, the plate only grows downward instead of re-centring (that was a 0.12 layout shift) */
-    margin-top: max(0px, calc((100svh - var(--nav-h) - var(--space-4) - 5.5rem - 36rem) / 2));
-    margin-bottom: var(--space-6);
-    /* line the plate up with the page grid (--maxw, centred) on wide screens */
-    margin-inline: max(0px, calc((100% - var(--maxw)) / 2)) 0;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
   }
 
-  .visual {
-    position: absolute;
-    top: calc(var(--nav-h) + var(--space-4));
-    right: 0;
-    bottom: 5.5rem;
-    left: calc(max(var(--gutter), (100% - var(--maxw)) / 2) + clamp(32rem, 50vw, 50rem) + var(--space-2));
-    width: auto;
-    max-width: none;
-    height: auto;
-    aspect-ratio: auto;
-    margin: 0;
+  .cta {
+    width: 100%;
+  }
+
+  .ctaButton {
+    flex: 1 1 100%;
   }
 }
 
-/* short laptop screens: keep the whole plate, CTAs included, above the fold */
-@media (min-width: 1000px) and (max-height: 700px) {
+/* short laptop screens: keep the whole block, CTAs included, above the fold */
+@media (min-width: 700px) and (max-height: 760px) {
   .content {
     gap: var(--space-4);
-    padding-block: var(--space-5);
-  }
-
-  .content .name {
-    font-size: clamp(2rem, 5.6vw, 4.4rem);
-  }
-
-  @supports (width: 1cqw) {
-    .content .name {
-      font-size: min(var(--fs-hero), 10.4cqw);
-    }
-  }
-
-  .lower {
-    gap: var(--space-3);
+    margin-top: var(--space-4);
   }
 
   .intro {
@@ -220,8 +140,49 @@
   }
 }
 
+/* ---- entrance: the lines rise in turn after the name's letters; transform and opacity only ---------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .eyebrow,
+  .role,
+  .intro,
+  .cta {
+    animation: rise 0.9s var(--ease-out) both;
+  }
+
+  .eyebrow {
+    animation-delay: 0.05s;
+  }
+
+  .role {
+    animation-delay: 0.7s;
+  }
+
+  .intro {
+    animation-delay: 0.85s;
+  }
+
+  .cta {
+    animation-delay: 1s;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.1rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pulse {
     animation: none;
+  }
+
+  .times {
+    transition: none;
   }
 }

@@ -2,22 +2,17 @@ import { profile } from '../../content/profile'
 import { Button } from '../ui/Button'
 import { KineticHeading } from '../ui/KineticHeading'
 import { Ticker } from '../ui/Ticker'
-import { GlassVisual } from './GlassVisual'
+import { HeroBackdrop } from './HeroBackdrop'
 import styles from './Hero.module.css'
 
 /**
- * Opening scene. A translucent glass panel carries the kinetic name, role, pitch and CTAs (left on desktop, below the
- * visual on small screens); one large frosted-glass interface — a floating, perspective-tilted object over the lime grid —
- * is the visual on the right. It is plain DOM/SVG/CSS, so nothing loads late and nothing shifts.
+ * Opening scene — typography first. The name is set as large as the column allows, the role and the pitch sit beneath it,
+ * and the only graphics are quiet ones behind the copy (HeroBackdrop: grid, lime light, flowing contours, an outlined AG).
  */
 export function Hero() {
   return (
     <section id="hero" className={styles.hero} aria-label="Introduction">
-      <div className={styles.backdrop} aria-hidden="true" />
-
-      <div className={styles.visual} data-hero-visual>
-        <GlassVisual />
-      </div>
+      <HeroBackdrop />
 
       <div className={styles.content} data-hero-content>
         <p className={styles.eyebrow}>
@@ -27,23 +22,23 @@ export function Hero() {
 
         <KineticHeading className={styles.name} lines={[profile.firstName.toUpperCase(), profile.lastName.toUpperCase()]} lineStyles={['solid', 'lime']} label={profile.name} />
 
-        <div className={styles.lower}>
-          <p className={styles.role}>
-            <span className={styles.roleLine}>
-              UI/UX Designer <span className={styles.times} aria-hidden="true">×</span>
-            </span>
-            <span className="sr-only"> and </span>
-            <span className={styles.roleLine}>Frontend Developer</span>
-          </p>
-          <p className={styles.intro}>{profile.intro}</p>
-          <div className={styles.cta}>
-            <Button href="/#work" size="lg" arrow>
-              Explore the work
-            </Button>
-            <Button href="/#contact" variant="ghost" size="lg">
-              Get in touch
-            </Button>
-          </div>
+        <p className={styles.role}>
+          <span className={styles.roleLine}>
+            UI/UX Designer <span className={styles.times} aria-hidden="true">×</span>
+          </span>
+          <span className="sr-only"> and </span>{' '}
+          <span className={styles.roleLine}>Frontend Developer</span>
+        </p>
+
+        <p className={styles.intro}>{profile.heroIntro}</p>
+
+        <div className={styles.cta}>
+          <Button className={styles.ctaButton} href="/#work" size="lg" arrow>
+            Explore the work
+          </Button>
+          <Button className={styles.ctaButton} href="/#contact" variant="ghost" size="lg">
+            Get in touch
+          </Button>
         </div>
       </div>
 

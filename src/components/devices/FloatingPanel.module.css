@@ -10,7 +10,7 @@
     inset 0 0 0 1px rgba(255, 255, 255, 0.6),
     0 2.4em 3.4em -1em rgba(0, 0, 0, 0.7),
     0 0.5em 1.2em rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(200, 255, 46, 0.18);
+    0 0 0 1px rgba(197, 255, 39, 0.18);
   transform-style: preserve-3d;
 }
 
@@ -39,7 +39,7 @@
   padding: 0.25em 0.8em;
   border-radius: 999px;
   background: rgba(8, 9, 11, 0.9);
-  box-shadow: 0 0 0 1px rgba(200, 255, 46, 0.35);
+  box-shadow: 0 0 0 1px rgba(197, 255, 39, 0.35);
   font-family: var(--font-mono);
   font-size: 0.74em;
   letter-spacing: 0.08em;

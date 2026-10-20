@@ -7,7 +7,7 @@
 
   /* ---- Backgrounds & surface elevations (graphite → near-black) ---------- */
   --ink-0: #050607; /* deepest: letterbox, video-like voids */
-  --ink-1: #08090b; /* page background */
+  --ink-1: #080909; /* page background */
   --ink-2: #0d0f12; /* surface 1: sections, cards at rest */
   --ink-3: #13161b; /* surface 2: raised cards, inputs */
   --ink-4: #1a1e25; /* surface 3: hover, active rows */
@@ -26,12 +26,12 @@
   /* ---- Signature accent: electric lime ------------------------------------ */
   --lime-300: #e4ff8a;
   --lime-400: #d6ff55;
-  --lime-500: #c8ff2e; /* the accent */
+  --lime-500: #c5ff27; /* the accent */
   --lime-600: #a9e000;
   --lime-ink: #0b1200; /* text on lime (16:1) */
-  --lime-a08: rgba(200, 255, 46, 0.08);
-  --lime-a16: rgba(200, 255, 46, 0.16);
-  --lime-a32: rgba(200, 255, 46, 0.32);
+  --lime-a08: rgba(197, 255, 39, 0.08);
+  --lime-a16: rgba(197, 255, 39, 0.16);
+  --lime-a32: rgba(197, 255, 39, 0.32);
 
   /* ---- Semantic colours --------------------------------------------------- */
   --ok: #5be7a0;

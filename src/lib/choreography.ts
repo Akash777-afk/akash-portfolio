@@ -9,7 +9,7 @@ import { useEffect } from 'react'
  * Only runs when the visitor has not asked for reduced motion (gsap.matchMedia); otherwise the CSS resting poses
  * remain — the devices are still 3D, just static. Amplitudes are smaller on narrow screens.
  *
- *   hero exit        → hero copy drifts up and fades; the glass object tilts back, sinks and fades
+ *   hero exit        → hero copy drifts up and fades; the background (lines, monogram) fades out
  *   floors           → a perspective grid slides in under the first project, and at the top of Skills, Contact and the footer
  *   each project     → the device rig swings in with depth (rotate / rise / push back to front), layers drift at
  *                      different speeds (parallax), then the rig turns away slightly as the section leaves
@@ -34,7 +34,6 @@ export function useChoreography() {
       if (hero) {
         gsap.to('[data-hero-content]', { yPercent: wide ? -8 : -4, opacity: 0.15, ease: 'none', scrollTrigger: { trigger: hero, start: '35% top', end: 'bottom top', scrub: true } })
         gsap.to('[data-hero-visual]', { opacity: 0, ease: 'none', scrollTrigger: { trigger: hero, start: '55% top', end: 'bottom top', scrub: true } })
-        gsap.to('#hero [data-rig]', { rotationX: 10, yPercent: 14, z: -120, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } })
       }
 
       /* ---- dimensional floor between hero and work ------------------------------------------------------------ */

@@ -17,6 +17,9 @@ export const profile = {
     'UI/UX designer and frontend developer in Chennai, India. Enterprise interface design, Figma prototyping and Angular / React implementation — plus BreakFit, an IoT monitoring dashboard and the Validate case study.',
   intro:
     'I design interfaces for complex products and build them in Angular and React — analytical thinking, user-centred design and frontend execution in one workflow.',
+  /** The pitch under the name on the home page (the résumé page keeps the shorter `intro`). */
+  heroIntro:
+    'I design interfaces for complex products and bring them to life through frontend development — combining analytical thinking, user-centred design, and technical execution.',
   ticker: ['UI/UX design', 'Frontend development', 'Design systems', 'Figma', 'Angular', 'React', 'TypeScript', 'Responsive web design'],
   resumePdf: '/Akash-Ganapathy-Resume.pdf',
 }
@@ -24,7 +27,7 @@ export const profile = {
 export const aboutIntro = {
   heading: 'Analytical by training, human-centred by practice.',
   paragraphs: [
-    'I came to interface design through Psychology — a B.Sc. and an M.Sc. — which taught me to reason from evidence and to understand how people notice, decide and make mistakes.',
+    'I came to interface design through psychology, which taught me to reason from evidence and understand how people notice, make decisions, and interact with the world around them.',
     'That is how I work now: start from requirements and usability evidence, shape flows and wireframes in Figma, then carry the design into Angular and React so that what ships is what was designed.',
   ],
 }

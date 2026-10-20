@@ -20,8 +20,8 @@
   top: 0;
   height: 44rem;
   background:
-    linear-gradient(rgba(200, 255, 46, calc(0.5 * var(--strength))) 1px, transparent 1px) 0 0 / 100% 4rem,
-    linear-gradient(90deg, rgba(200, 255, 46, calc(0.4 * var(--strength))) 1px, transparent 1px) 0 0 / 5rem 100%;
+    linear-gradient(rgba(197, 255, 39, calc(0.5 * var(--strength))) 1px, transparent 1px) 0 0 / 100% 4rem,
+    linear-gradient(90deg, rgba(197, 255, 39, calc(0.4 * var(--strength))) 1px, transparent 1px) 0 0 / 5rem 100%;
   transform: rotateX(74deg);
   transform-origin: 50% 0;
 }
