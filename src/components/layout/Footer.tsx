@@ -72,7 +72,7 @@ export function Footer() {
         </nav>
       </div>
       <p className={styles.fine}>
-        Built with Next.js, React, TypeScript, three.js, GSAP and Motion · Project screens are real captures of the applications.
+        Built with Next.js, React, TypeScript, GSAP and Motion · Project screens are real captures of the applications.
       </p>
     </footer>
   )

@@ -102,4 +102,4 @@ export const skillGroups: SkillGroup[] = [
 ]
 
 /** Used to build THIS website only — deliberately kept separate from the résumé skills above. */
-export const portfolioBuildStack = ['Next.js', 'React', 'TypeScript', 'three.js + react-three-fiber', 'GSAP + ScrollTrigger', 'Motion for React', 'CSS Modules']
+export const portfolioBuildStack = ['Next.js', 'React', 'TypeScript', 'GSAP + ScrollTrigger', 'Motion for React', 'CSS Modules']

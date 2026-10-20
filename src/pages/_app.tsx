@@ -3,7 +3,6 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Layout } from '../components/layout/Layout'
 import { profile } from '../content/profile'
-import { ExperienceProvider } from '../lib/experience'
 import '../styles/tokens.css'
 import '../styles/global.css'
 
@@ -23,11 +22,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <style>{`[data-reveal],[data-entry]{opacity:1!important;transform:none!important}[data-wipe]{clip-path:none!important}`}</style>
       </noscript>
       <MotionConfig reducedMotion="user">
-        <ExperienceProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ExperienceProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </MotionConfig>
     </>
   )

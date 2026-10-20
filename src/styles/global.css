@@ -103,18 +103,7 @@ textarea {
   border: 0;
 }
 
-/* Experience switch: the <head> script sets data-exp="3d" | "static" before first paint. */
-.only-3d {
-  display: none;
-}
-html[data-exp='3d'] .only-3d {
-  display: revert;
-}
-html[data-exp='3d'] .only-static {
-  display: none;
-}
-
-/* A tall page with a fixed WebGL stage must never show a white flash. */
+/* keep the page content in its own stacking context so z-indexed layers never leak out */
 #__next {
   isolation: isolate;
 }

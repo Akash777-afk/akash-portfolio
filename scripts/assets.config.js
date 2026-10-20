@@ -31,8 +31,6 @@ module.exports = {
     { slug: 'iot', key: 'dashboard', src: `${RAW}/iot/dashboard.png`, widths: WIDE },
     { slug: 'iot', key: 'analytics', src: `${RAW}/iot/analytics.png`, widths: WIDE },
     { slug: 'iot', key: 'login', src: `${RAW}/live/iot-login.png`, widths: WIDE },
-    // hero: the analytics screen supplied by the author (assets/source/iot-analytics.png, 1918×825) — resized only
-    { slug: 'iot', key: 'hero', src: `${SOURCE}/iot-analytics.png`, widths: [1918, 960] },
     // floating panels: real regions of the dashboard screenshot (source is 2880 px wide; crop rects are in source px)
     { slug: 'iot', key: 'panel-status', src: `${RAW}/iot/dashboard.png`, crop: { x: 440, y: 650, w: 1160, h: 666 }, widths: [960, 640] },
     { slug: 'iot', key: 'panel-posture', src: `${RAW}/iot/dashboard.png`, crop: { x: 1628, y: 1344, w: 1160, h: 496 }, widths: [960, 640] },

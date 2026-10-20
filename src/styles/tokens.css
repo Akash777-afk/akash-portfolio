@@ -1,7 +1,5 @@
 /* ==========================================================================
-   Design tokens — single source of truth.
-   The WebGL scene reads colours from here at runtime (see lib/tokens.ts), so
-   changing a value below restyles both the DOM and the 3D stage.
+   Design tokens — single source of truth. Changing a value below restyles the whole site.
    ========================================================================== */
 
 :root {
@@ -96,7 +94,7 @@
   --persp: 1400px; /* CSS perspective for dimensional frames */
 
   /* ---- Layering ------------------------------------------------------------ */
-  --z-stage: 0; /* WebGL canvas */
+  --z-stage: 0; /* page background layers */
   --z-content: 1;
   --z-sticky: 20;
   --z-nav: 50;

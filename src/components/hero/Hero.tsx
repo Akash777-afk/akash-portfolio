@@ -1,29 +1,22 @@
-import { forwardRef } from 'react'
 import { profile } from '../../content/profile'
 import { Button } from '../ui/Button'
 import { KineticHeading } from '../ui/KineticHeading'
 import { Ticker } from '../ui/Ticker'
-import { HeroComposition } from './HeroComposition'
-import { HeroSceneHost } from './HeroSceneHost'
+import { GlassVisual } from './GlassVisual'
 import styles from './Hero.module.css'
 
 /**
  * Opening scene. A translucent glass panel carries the kinetic name, role, pitch and CTAs (left on desktop, below the
- * devices on small screens); the three real devices sit beside it — as a WebGL scene when 3D is available
- * (`html[data-exp="3d"]`), otherwise as the CSS-3D composition. Both occupy the same box, so nothing shifts.
+ * visual on small screens); one large frosted-glass interface — a floating, perspective-tilted object over the lime grid —
+ * is the visual on the right. It is plain DOM/SVG/CSS, so nothing loads late and nothing shifts.
  */
-export const Hero = forwardRef<HTMLElement, { sceneActive: boolean }>(function Hero({ sceneActive }, ref) {
+export function Hero() {
   return (
-    <section ref={ref} id="hero" className={styles.hero} aria-label="Introduction">
+    <section id="hero" className={styles.hero} aria-label="Introduction">
       <div className={styles.backdrop} aria-hidden="true" />
 
       <div className={styles.visual} data-hero-visual>
-        <div className="only-3d">
-          <HeroSceneHost active={sceneActive} />
-        </div>
-        <div className={`${styles.fallback} only-static`}>
-          <HeroComposition />
-        </div>
+        <GlassVisual />
       </div>
 
       <div className={styles.content} data-hero-content>
@@ -59,4 +52,4 @@ export const Hero = forwardRef<HTMLElement, { sceneActive: boolean }>(function H
       </div>
     </section>
   )
-})
+}
