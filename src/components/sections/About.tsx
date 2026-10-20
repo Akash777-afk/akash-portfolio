@@ -46,7 +46,7 @@ export function About() {
             </span>
             {experience.map((role) => (
               <li key={role.id} className={styles.entry} data-entry>
-                <span className={styles.node} aria-hidden="true" data-current={role.current ? 'true' : undefined} />
+                <span className={styles.node} aria-hidden="true" data-node data-current={role.current ? 'true' : undefined} />
                 <Slab as="article" className={styles.card} ry={-5} rx={1.5} tilt={3}>
                   <p className={styles.period}>
                     {role.period}

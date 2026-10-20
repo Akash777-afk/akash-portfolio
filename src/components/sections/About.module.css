@@ -142,17 +142,31 @@
   /* a small sphere, lit from the top left */
   background: radial-gradient(circle at 35% 30%, #4a515b, #14171b 62%, #08090b);
   box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-  transition:
-    border-color var(--dur-3) ease,
-    box-shadow var(--dur-3) ease;
+  transition: box-shadow var(--dur-3) ease;
 }
 
-.node[data-current='true'] {
+/* the lime sphere sits on top and fades in (a gradient can't be transitioned directly) */
+.node::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, var(--lime-300), var(--lime-500) 55%, #5f8208);
+  opacity: 0;
+  transition: opacity var(--dur-3) ease;
+}
+
+.node[data-current='true'],
+.node[data-lit] {
   box-shadow:
     0 0 0 4px var(--lime-a16),
     0 0 16px var(--lime-a32),
     0 0.3rem 0.5rem rgba(0, 0, 0, 0.6);
+}
+
+.node[data-current='true']::after,
+.node[data-lit]::after {
+  opacity: 1;
 }
 
 .card {
@@ -317,6 +331,12 @@
 @media (prefers-reduced-motion: reduce) {
   .about {
     margin-top: 0;
+  }
+
+  /* the spine is drawn in full (no scroll animation), so every node is lit */
+  .node::after {
+    opacity: 1;
+    transition: none;
   }
 
   .card {

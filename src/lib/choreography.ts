@@ -95,7 +95,16 @@ export function useChoreography() {
       /* ---- experience timeline ---------------------------------------------------------------------------------- */
       const spine = q('[data-spine]')[0]
       if (spine) {
-        gsap.fromTo(spine, { scaleY: 0 }, { scaleY: 1, ease: 'none', transformOrigin: '50% 0', scrollTrigger: { trigger: '[data-timeline]', start: 'top 70%', end: 'bottom 60%', scrub: true } })
+        const timeline = q('[data-timeline]')[0]
+        const nodes = q('[data-entry]').map((entry) => ({ entry, node: entry.querySelector<HTMLElement>('[data-node]') }))
+        // each node lights up when the tip of the spine reaches it, and goes dark again when you scroll back past it
+        const light = (progress: number) => {
+          const reach = progress * timeline.offsetHeight
+          nodes.forEach(({ entry, node }) => {
+            if (node) node.toggleAttribute('data-lit', entry.offsetTop + node.offsetTop + node.offsetHeight / 2 <= reach)
+          })
+        }
+        gsap.fromTo(spine, { scaleY: 0 }, { scaleY: 1, ease: 'none', transformOrigin: '50% 0', scrollTrigger: { trigger: timeline, start: 'top 70%', end: 'bottom 60%', scrub: true, onUpdate: (self) => light(self.progress), onRefresh: (self) => light(self.progress) } })
       }
       q('[data-entry]').forEach((entry) => {
         gsap.fromTo(entry, { opacity: 0, x: wide ? -36 : -16, rotationY: wide ? -8 : 0 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: entry, start: 'top 85%', toggleActions: 'play none none none' } })
