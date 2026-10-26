@@ -74,6 +74,7 @@ export const projects: Project[] = [
       { value: '1M → 100K', label: 'rows, stratified and validated' },
     ],
     live: { href: 'https://iot-dashboard-snowy.vercel.app/#/login', label: 'Live demo' },
+    caseStudy: { href: 'https://iot-case-study.vercel.app/', label: 'Case study' },
     primary: 'live',
   },
   {
