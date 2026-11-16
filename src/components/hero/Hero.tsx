@@ -1,7 +1,6 @@
 import { profile } from '../../content/profile'
 import { Button } from '../ui/Button'
 import { KineticHeading } from '../ui/KineticHeading'
-import { Ticker } from '../ui/Ticker'
 import { HeroBackdrop } from './HeroBackdrop'
 import styles from './Hero.module.css'
 
@@ -40,10 +39,6 @@ export function Hero() {
             Get in touch
           </Button>
         </div>
-      </div>
-
-      <div className={styles.ticker}>
-        <Ticker items={profile.ticker} />
       </div>
     </section>
   )

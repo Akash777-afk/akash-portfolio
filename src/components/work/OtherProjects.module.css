@@ -1,0 +1,169 @@
+.section {
+  position: relative;
+  padding: var(--space-9) var(--gutter);
+  border-top: 1px solid var(--line-1);
+  overflow: clip;
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-7);
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.item {
+  min-width: 0;
+}
+
+.card {
+  display: grid;
+  height: 100%;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-4);
+  background: linear-gradient(180deg, var(--ink-3), var(--ink-2) 55%);
+  box-shadow: 0 2.5rem 4rem -2rem rgba(0, 0, 0, 0.7);
+  overflow: clip;
+  transition:
+    border-color var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .card:hover {
+    border-color: var(--lime-a32);
+  }
+}
+
+/* the composition sits on a soft lime-lit stage at the top of the card */
+.visual {
+  position: relative;
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  background: radial-gradient(70% 80% at 50% 45%, var(--lime-a08), transparent 70%);
+}
+
+.body {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-top: 1px solid var(--line-1);
+}
+
+.kicker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.date {
+  color: var(--text-3);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.titleLink {
+  display: inline;
+  background: linear-gradient(var(--lime-500), var(--lime-500)) 0 100% / 0 2px no-repeat;
+  padding-bottom: 0.1em;
+  transition: background-size var(--dur-3) var(--ease-out);
+}
+
+.titleIcon {
+  display: inline-block;
+  margin-left: 0.3em;
+  vertical-align: 0.05em;
+  color: var(--lime-500);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .titleLink:hover {
+    background-size: 100% 2px;
+  }
+
+  .titleLink:hover .titleIcon {
+    transform: translate(2px, -2px);
+  }
+}
+
+.summary {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--text-1);
+}
+
+.brief {
+  display: grid;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+  border-block: 1px solid var(--line-1);
+}
+
+.brief dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.brief dd {
+  margin-top: 0.15rem;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-top: var(--space-1);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+@media (min-width: 960px) {
+  .section {
+    padding-block: var(--space-10);
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .body {
+    padding: var(--space-6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}

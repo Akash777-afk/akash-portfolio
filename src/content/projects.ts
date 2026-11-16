@@ -1,7 +1,7 @@
 import assetManifest from './assets.generated.json'
 
 /**
- * The portfolio's three projects.
+ * The portfolio's three main projects (and, further down, `otherProjects`).
  *
  * Three destinations are kept distinct everywhere:
  *   1. the portfolio's own presentation of the project (the 3D device composition),
@@ -102,11 +102,58 @@ export const projects: Project[] = [
   },
 ]
 
+/**
+ * Other projects: UX case studies shown more compactly below the three main projects. Each one has a case study
+ * only (no live app), so the title, the composition and the button all open the case study.
+ */
+export interface OtherProject {
+  slug: 'sdwan' | 'irctc'
+  title: string
+  kicker: string
+  summary: string
+  /** What was wrong before */
+  problem: string
+  /** What the redesign changed */
+  outcome: string
+  tools: string[]
+  published: string
+  caseStudy: ProjectLink
+}
+
+export const otherProjects: OtherProject[] = [
+  {
+    slug: 'sdwan',
+    title: 'SD-WAN Management — Redesigned',
+    kicker: 'Enterprise dashboard · UX redesign',
+    summary:
+      'A redesign of a software-defined wide-area-network console: one dashboard to control every branch network, with link optimisation, security and application-aware routing.',
+    problem: 'The previous design had a weak visual hierarchy, an inconsistent design system and call-to-action buttons that were easy to miss.',
+    outcome: 'A clear visual hierarchy, one consistent design system, CTAs where they are needed and a better-organised content structure.',
+    tools: ['Figma', 'Adobe XD'],
+    published: 'February 2026',
+    caseStudy: { href: 'https://www.behance.net/gallery/243946651/SD-WAN-management', label: 'Case study' },
+  },
+  {
+    slug: 'irctc',
+    title: 'IRCTC Website Redesign',
+    kicker: 'Public-service website · UX case study',
+    summary: 'How thoughtful UX decisions can reduce stress and errors in one of India’s most critical public-service platforms: train ticket booking.',
+    problem: 'The current site is cluttered and hard to navigate, with poor readability and a high cognitive load — especially for first-time and elderly users.',
+    outcome: 'A streamlined search, clear calls to action and a step-by-step booking flow that cuts booking time and errors for every age group.',
+    tools: ['Figma', 'FigJam'],
+    published: 'December 2025',
+    caseStudy: { href: 'https://www.behance.net/gallery/240435669/IRCTC-Website-Redesign-UX-Case-Study', label: 'Case study' },
+  },
+]
+
 export const primaryLink = (p: Project): ProjectLink => (p.primary === 'live' ? p.live! : p.caseStudy!)
 
-export const provisionalLinks = projects.flatMap((p) =>
-  ([p.live, p.caseStudy].filter(Boolean) as ProjectLink[]).filter((l) => l.provisional).map((l) => ({ project: p.title, href: l.href, reason: l.provisional as string })),
-)
+export const provisionalLinks = [
+  ...projects.flatMap((p) => ([p.live, p.caseStudy].filter(Boolean) as ProjectLink[]).map((l) => ({ project: p.title, link: l }))),
+  ...otherProjects.map((p) => ({ project: p.title, link: p.caseStudy })),
+]
+  .filter(({ link }) => link.provisional)
+  .map(({ project, link }) => ({ project, href: link.href, reason: link.provisional as string }))
 
 /* ---------------------------------------------------------------------------------------------- images */
 

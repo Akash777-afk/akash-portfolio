@@ -55,6 +55,56 @@ export function IotComposition({ href, hint }: CompositionProps) {
   )
 }
 
+/** SD-WAN: the case-study cover in a browser frame, with two real slide panels (vendor split, improvements) lifted off it. */
+export function SdwanComposition({ href, hint }: CompositionProps) {
+  return (
+    <Scene aspect={1.45} label="SD-WAN Management case study in a browser window with two floating slide panels" href={href} hint={hint}>
+      <Slot x={10} y={2} w={78} depth={-0.1} pose="rotateY(-14deg) rotateX(6deg) rotateZ(-1deg)" z={1}>
+        {(v) => (
+          <BrowserDevice
+            style={v}
+            image={img('sdwan', 'cover')}
+            alt="SD-WAN Redesigned case-study cover: “Software defined wide area network management”, presented by Akash Ganapathy, UX designer."
+            label="SD-WAN Management — UX case study"
+            sizes="(min-width: 960px) 30vw, 80vw"
+          />
+        )}
+      </Slot>
+      <Slot x={61} y={34} w={36} depth={0.6} pose="translateZ(120px) rotateY(-18deg) rotateX(4deg)" z={3}>
+        {(v) => <FloatingPanel style={v} image={img('sdwan', 'panel-improvements')} tag="Improvements" sizes="(min-width: 960px) 14vw, 36vw" />}
+      </Slot>
+      <Slot x={1} y={42} w={56} depth={0.35} pose="translateZ(140px) rotateY(-12deg) rotateX(4deg)" z={4}>
+        {(v) => <FloatingPanel style={v} image={img('sdwan', 'panel-vendors')} tag="Vendor split" sizes="(min-width: 960px) 24vw, 60vw" />}
+      </Slot>
+    </Scene>
+  )
+}
+
+/** IRCTC: the case-study cover in a browser frame, the old booking page behind it and the redesigned search in front. */
+export function IrctcComposition({ href, hint }: CompositionProps) {
+  return (
+    <Scene aspect={1.45} label="IRCTC website redesign case study in a browser window, with the old and redesigned screens floating beside it" href={href} hint={hint}>
+      <Slot x={20} y={6} w={76} depth={-0.1} pose="rotateY(14deg) rotateX(6deg) rotateZ(1deg)" z={1}>
+        {(v) => (
+          <BrowserDevice
+            style={v}
+            image={img('irctc', 'cover')}
+            alt="IRCTC case-study cover: the redesigned Indian Railways homepage on a laptop beside “Redesigning IRCTC for Better Usability”, redesigned by Akash Ganapathy."
+            label="IRCTC redesign — UX case study"
+            sizes="(min-width: 960px) 30vw, 80vw"
+          />
+        )}
+      </Slot>
+      <Slot x={2} y={4} w={34} depth={0.5} pose="translateZ(90px) rotateY(16deg) rotateX(4deg)" z={2}>
+        {(v) => <FloatingPanel style={v} image={img('irctc', 'panel-old')} tag="Before" sizes="(min-width: 960px) 14vw, 36vw" />}
+      </Slot>
+      <Slot x={36} y={34} w={58} depth={0.35} pose="translateZ(150px) rotateY(12deg) rotateX(4deg)" z={4}>
+        {(v) => <FloatingPanel style={v} image={img('irctc', 'panel-search')} tag="Redesigned search" sizes="(min-width: 960px) 24vw, 60vw" />}
+      </Slot>
+    </Scene>
+  )
+}
+
 /** Validate: the presentation board in a desktop frame, with the app screen (extracted from that board) as a phone in front. */
 export function ValidateComposition({ href, hint }: CompositionProps) {
   return (

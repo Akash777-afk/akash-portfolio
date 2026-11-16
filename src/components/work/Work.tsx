@@ -2,6 +2,7 @@ import { projects } from '../../content/projects'
 import { SectionHeading } from '../ui/SectionHeading'
 import { DepthFloor } from '../ui/DepthFloor'
 import { Reveal } from '../ui/Reveal'
+import { OtherProjects } from './OtherProjects'
 import { ProjectSection } from './ProjectSection'
 import styles from './Work.module.css'
 
@@ -29,6 +30,8 @@ export function Work() {
       {projects.map((project, i) => (
         <ProjectSection key={project.slug} project={project} flip={i % 2 === 1} />
       ))}
+
+      <OtherProjects />
     </div>
   )
 }

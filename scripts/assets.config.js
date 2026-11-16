@@ -39,5 +39,15 @@ module.exports = {
     // Validate — the author's presentation cover, and the app screen extracted from it (see warp.js notes in README)
     { slug: 'validate', key: 'cover', src: `${DOWNLOADS}/Validate.png`, widths: WIDE },
     { slug: 'validate', key: 'phone', src: `${RAW}/validate/phone-screen.png`, widths: [640, 320] },
+
+    // Other projects — the author's own Behance case-study slides (3840×2160), kept in assets/source; crop rects in source px
+    // SD-WAN Management: https://www.behance.net/gallery/243946651/SD-WAN-management
+    { slug: 'sdwan', key: 'cover', src: `${SOURCE}/sdwan/cover.webp`, widths: [1440, 720] },
+    { slug: 'sdwan', key: 'panel-vendors', src: `${SOURCE}/sdwan/vendors.webp`, crop: { x: 400, y: 720, w: 3110, h: 1110 }, widths: [960, 640] },
+    { slug: 'sdwan', key: 'panel-improvements', src: `${SOURCE}/sdwan/improvements.webp`, crop: { x: 1900, y: 550, w: 1660, h: 1130 }, widths: [720, 480] },
+    // IRCTC Website Redesign: https://www.behance.net/gallery/240435669/IRCTC-Website-Redesign-UX-Case-Study
+    { slug: 'irctc', key: 'cover', src: `${SOURCE}/irctc/cover.webp`, widths: [1440, 720] },
+    { slug: 'irctc', key: 'panel-old', src: `${SOURCE}/irctc/old-ui.webp`, crop: { x: 597, y: 1225, w: 1469, h: 677 }, widths: [720, 480] },
+    { slug: 'irctc', key: 'panel-search', src: `${SOURCE}/irctc/search.webp`, crop: { x: 2216, y: 641, w: 1316, h: 751 }, widths: [960, 640] },
   ],
 }

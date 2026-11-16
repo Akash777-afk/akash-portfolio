@@ -20,7 +20,6 @@ export const profile = {
   /** The pitch under the name on the home page (the résumé page keeps the shorter `intro`). */
   heroIntro:
     'I design interfaces for complex products and bring them to life through frontend development — combining analytical thinking, user-centred design, and technical execution.',
-  ticker: ['UI/UX design', 'Frontend development', 'Design systems', 'Figma', 'Angular', 'React', 'TypeScript', 'Responsive web design'],
   resumePdf: '/Akash-Ganapathy-Resume.pdf',
 }
 
